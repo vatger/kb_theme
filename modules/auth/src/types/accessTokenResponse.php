@@ -18,6 +18,6 @@ class AccessTokenResponse
         $this->expiresIn = $body["expires_in"];
         $this->accessToken = $body["access_token"];
         $this->refreshToken = $body["refresh_token"];
-        $this->scopes = $body["scopes"];
+        $this->scopes = isset($body["scopes"]) ? $body["scopes"] : [];
     }
 }
