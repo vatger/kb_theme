@@ -82,7 +82,7 @@ class VatgerAuthProvider implements IAuthProvider
 
         $state = $request->query('state');
 
-        if (!hash_equals($state, session()->pull(self::SESSION_KEY))) {
+        if (strcmp($state, session()->get(self::SESSION_KEY)) != 0) {
             return redirect('/')->with('error', 'Auth state mismatch.');
         }
 
