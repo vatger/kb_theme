@@ -33,6 +33,11 @@ function registerRoutes(): void
                     AuthController::class,
                     'callback'
                 ]);
+
+                Route::post('/logout', [
+                    AuthController::class,
+                    'logout'
+                ]);
         });
 
         Route::middleware(['auth'])->group(function () {

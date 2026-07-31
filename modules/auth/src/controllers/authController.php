@@ -29,4 +29,13 @@ class AuthController extends Controller
     {
         return $this->provider->callback($request);
     }
+
+    #[NoReturn]
+    public function logout(): RedirectResponse 
+    {
+        auth()->logout();
+        session()->invalidate();
+
+        return redirect("/")->with("success", "Logged out successfully!");
+    }
 }

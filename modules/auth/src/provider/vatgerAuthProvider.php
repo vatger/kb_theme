@@ -93,8 +93,9 @@ class VatgerAuthProvider implements IAuthProvider
             $user = $this->getUserDetails($tokenResponse->accessToken);
             $loginUser = $this->upsertUser($user);
 
-            $this->loginService->login($loginUser, 'oidc', true);
+            $this->loginService->login($loginUser, 'vatger', true);
         } catch (Exception | GuzzleException $e) {
+            dd($e);
             return redirect('/')->with('error', $e->getMessage());
         }
 
