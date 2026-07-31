@@ -144,8 +144,7 @@ class VatgerAuthProvider implements IAuthProvider
             throw new Exception("Missing code from vatsim response");
         }
 
-        $response = $this->httpClient->post(
-            $this->state->baseUri . '/oauth/token',
+        $response = $this->httpClient->post($this->state->tokenEndpoint,
             [
                 'headers' => [
                     'Content-Type' => 'application/x-www-form-urlencoded',
@@ -171,8 +170,7 @@ class VatgerAuthProvider implements IAuthProvider
      */
     private function getUserDetails(string $accessToken): VatgerUserResponse
     {
-        $response = $this->httpClient->get(
-            $this->state->baseUri . '/oauth/userinfo',
+        $response = $this->httpClient->get($this->state->userInfoEndpoint,
             [
                 'headers' => [
                     'Accept' => 'application/json',

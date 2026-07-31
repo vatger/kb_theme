@@ -8,6 +8,7 @@ use RuntimeException;
 class OAuthState
 {
     public string $baseUri;
+    public string $userInfoEndpoint;
     public int $clientId;
     public string $clientSecret;
     public string $redirectUri;
@@ -20,6 +21,8 @@ class OAuthState
 
         $state->baseUri = rtrim(OAuthState::requiredEnv("OAUTH_BASE_URI"), '/');
         $state->clientId = OAuthState::requiredEnv("OAUTH_CLIENT_ID");
+        $state->tokenEndpoint = OAuthState::requiredEnv("OAUTH_TOKEN_URI");
+        $state->userInfoEndpoint = OAuthState::requiredEnv("OAUTH_USER_INFO_URI");
         $state->clientSecret = OAuthState::requiredEnv("OAUTH_CLIENT_SECRET");
         $state->redirectUri = URL::to("/vatger/oauth/callback");
         $state->scopes = explode(',', OAuthState::requiredEnv("OAUTH_SCOPES"));
