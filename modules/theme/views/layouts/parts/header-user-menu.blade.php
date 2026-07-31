@@ -46,7 +46,7 @@
                     default => '/logout',
                 }
             @endphp
-            <form action="{{ url("/vatger/logout") }}" method="post">
+            <form action="{{ url("/vatger/oauth/logout") }}" method="post">
                 {{ csrf_field() }}
                 <button class="icon-item" role="menuitem" data-shortcut="logout">
                     @icon('logout')
