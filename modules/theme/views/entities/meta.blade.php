@@ -20,7 +20,7 @@
             @icon('user')
             <div>
                 {!! trans('entities.meta_owned_name', [
-                    'user' => "<a href='{$entity->ownedBy->getProfileUrl()}'>".e($entity->ownedBy->name). "</a>"
+                    'user' => "<a href='{$entity->ownedBy->getProfileUrl()}'>".e($entity->ownedBy->id). "</a>"
                 ]) !!}
             </div>
         </div>
@@ -32,7 +32,7 @@
             <div>
                 {!! trans('entities.meta_created_name', [
                     'timeLength' => '<span title="'. $dates->absolute($entity->created_at) .'">'. $dates->relative($entity->created_at) . '</span>',
-                    'user' => "<a href='{$entity->createdBy->getProfileUrl()}'>".e($entity->createdBy->id). "</a>"
+                    'user' => $entity->createdBy->id
                 ]) !!}
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div>
                 {!! trans('entities.meta_updated_name', [
                     'timeLength' => '<span title="' . $dates->absolute($entity->updated_at) .'">' . $dates->relative($entity->updated_at) .'</span>',
-                    'user' => "<a href='{$entity->updatedBy->getProfileUrl()}'>".e($entity->updatedBy->name). "</a>"
+                    'user' => $entity->updatedBy->id
                 ]) !!}
             </div>
         </div>
