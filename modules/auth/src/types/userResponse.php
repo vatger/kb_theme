@@ -19,3 +19,19 @@ class UserResponse
         $this->email = $user["personal"]["email"];
     }
 }
+
+class VatgerUserResponse 
+{
+    public string $cid;
+    public string $name_first;
+    public string $name_last;
+    public string $email;
+
+    public function __construct(array $body)
+    {
+        $this->cid = $body["id"];
+        $this->name_first = $body["firstname"];
+        $this->name_last = $body["lastname"];
+        $this->email = $body["email"];
+    }
+}
