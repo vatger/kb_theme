@@ -105,24 +105,26 @@ class VatgerAuthProvider implements IAuthProvider
      * @param VatgerUserResponse $VatgerUserResponse
      * @return BaseUser
      */
-    private function upsertUser(VatgerUserResponse $VatgerUserResponse): BaseUser
+    private function upsertUser(VatgerUserResponse $vatgerUserResponse): BaseUser
     {
         $user = User::query()
-            ->where('id', $VatgerUserResponse->cid)
-            ->where('email', $VatgerUserResponse->email)
+            ->where('id', $vatgerUserResponse->cid)
             ->first();
 
         if (!$user) {
             $user = new User();
-            $user->id = $VatgerUserResponse->cid;
-            $user->name = $VatgerUserResponse->name_first . ' ' . $VatgerUserResponse->name_last;
-            $user->email = $VatgerUserResponse->email;
+            $user->id = $vatgerUserResponse->cid;
             $user->password = Str::random(128);
-            $user->external_auth_id = $VatgerUserResponse->cid;
+            $user->external_auth_id = $vatgerUserResponse->cid;
+        }
 
-            $this->slugGenerator->regenerateForUser($user);
-            $user->save();
+        $user->name = $vatgerUserResponse->name_first . ' ' . $vatgerUserResponse->name_last;
+        $user->email = $vatgerUserResponse->email;
 
+        $this->slugGenerator->regenerateForUser($user);
+        $user->save();
+
+        if ($user->wasRecentlyCreated) {
             try {
                 $this->userAvatars->fetchAndAssignToUser($user);
             } catch (Exception $e) {
