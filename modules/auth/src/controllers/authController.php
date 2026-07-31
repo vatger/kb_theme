@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use JetBrains\PhpStorm\NoReturn;
 use Vatger\Auth\Provider\IAuthProvider;
-use Vatger\Auth\Provider\VatsimAuthProvider;
+use Vatger\Auth\Provider\VatgerAuthProvider;
 
 class AuthController extends Controller
 {
@@ -15,7 +15,7 @@ class AuthController extends Controller
 
     public function __construct()
     {
-        $this->provider = new VatsimAuthProvider();
+        $this->provider = new VatgerAuthProvider();
     }
 
     #[NoReturn]
