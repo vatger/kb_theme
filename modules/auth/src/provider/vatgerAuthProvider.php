@@ -95,7 +95,9 @@ class VatgerAuthProvider implements IAuthProvider
 
             $this->loginService->login($loginUser, 'vatger', true);
         } catch (Exception | GuzzleException $e) {
-            dd($e);
+            if (!app()->isProduction()) {
+                dd($e);
+            }
             return redirect('/')->with('error', $e->getMessage());
         }
 
